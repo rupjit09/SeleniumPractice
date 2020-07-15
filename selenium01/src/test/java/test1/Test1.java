@@ -1,8 +1,11 @@
 package test1;
 
+import java.io.File;
+
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -13,7 +16,7 @@ public class Test1 {
 	static WebDriver driver;
 	public static void main(String[] args) {
 		
-				launchBrowser("firefox");
+				launchBrowser("chrome");
 				driver.get("https://www.google.co.in/");
 		
 		
@@ -33,10 +36,10 @@ public class Test1 {
 			driver = new FirefoxDriver(opt);			
 		}else if (browserName.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver","C:\\Users\\rdas\\Desktop\\selenium\\chromedriver_win32\\chromedriver.exe");
-			Proxy proxy = new Proxy();
-			DesiredCapabilities cap = new DesiredCapabilities();
-			
-			driver=new ChromeDriver();
+			ChromeOptions opt=new ChromeOptions();
+			opt.addExtensions(new File("C:\\Users\\rdas\\Desktop\\selenium\\extension_6_1_7_0.crx"));
+			//opt.addArguments("user-data-dri=C:\\Users\\rdas\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1");
+			driver=new ChromeDriver(opt);
 		}
 	}
 }

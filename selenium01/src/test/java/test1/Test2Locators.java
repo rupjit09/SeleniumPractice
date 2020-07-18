@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -48,6 +49,12 @@ public class Test2Locators extends Test1{
 		//click and set the departure date
 		driver.findElement(By.xpath("//div[@class='ig-input-group field-float cal-focus']//input[@placeholder='Departure Date']")).click();
 		
+		//Some important way of locating elements
+		driver.findElement(By.xpath("//input[contains(@class,'indis')]")).click();
+		driver.findElement(By.xpath("//a[contains(text(),'Click Here')]")).click();
+		driver.findElement(By.xpath("//div[starts-with(@class,'ig-ip_')]")).click();
+		driver.findElement(By.xpath("//div[ends-with(@class,'ig-ip_')]")).click();
+
 	}
 
 }

@@ -36,7 +36,7 @@ public class DragNdrop {
 		Thread.sleep(5000);
 		FileUtils.cleanDirectory(new File("C:\\Users\\rdas\\Desktop\\selenium\\SceenShot"));
 		//take Screen Shot
-		frameworkUtils.TakeScreenShot.getScreenShot(driver, "C:\\Users\\rdas\\Desktop\\selenium\\SceenShot\\test1.png");;
+		frameworkUtils.RandomUtils.getScreenShot(driver, "C:\\Users\\rdas\\Desktop\\selenium\\SceenShot\\test1.png");;
 		driver.navigate().refresh();
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.switchTo().frame(0);
@@ -45,7 +45,7 @@ public class DragNdrop {
 		//drag and drop method2
 		action.dragAndDrop(src, dest).build().perform();
 		Thread.sleep(5000);
-		frameworkUtils.TakeScreenShot.getScreenShot(driver, "C:\\Users\\rdas\\Desktop\\selenium\\SceenShot\\test2.png");;
+		frameworkUtils.RandomUtils.getScreenShot(driver, "C:\\Users\\rdas\\Desktop\\selenium\\SceenShot\\test2.png");;
 	}
 
 }

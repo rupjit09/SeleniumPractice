@@ -6,18 +6,11 @@ import java.util.Properties;
 
 public class ReadFile {
 
-	public static void main(String[] args) throws IOException {
-		System.out.println(ReadFile.getProperty("browser"));
-
-	}
-	public static String getProperty(String propertyName) throws IOException {
-		
+		public static String getProperty(String propertyName, String propertiesFileLocation) throws IOException {
 		Properties prop= new Properties();
-		System.out.println(System.getProperty("user.dir")+"\\src\\test\\java\\frameworkUtils\\config.properties");
-		FileInputStream fp=new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\java\\frameworkUtils\\config.properties");
+		FileInputStream fp=new FileInputStream(propertiesFileLocation);
 		prop.load(fp);
 		String propertyValue=prop.getProperty(propertyName, "Property Not Found");
 		return propertyValue;
-		
-	}
+		}
 }

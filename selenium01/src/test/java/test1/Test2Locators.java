@@ -54,6 +54,24 @@ public class Test2Locators extends Test1{
 		driver.findElement(By.xpath("//a[contains(text(),'Click Here')]")).click();
 		driver.findElement(By.xpath("//div[starts-with(@class,'ig-ip_')]")).click();
 		driver.findElement(By.xpath("//div[ends-with(@class,'ig-ip_')]")).click();
+		
+		/*sample xpath
+		//a[contains(text(),'Roston Chase')]//ancestor::tbody//following-sibling::tbody//a[@class='long-name']
+		Others that can be used are as below>>
+ancestor-------------Selects all ancestors (parent, grandparent, etc.) of the current node
+ancestor-or-self-----Selects all ancestors (parent, grandparent, etc.) of the current node and the current node itself
+attribute------------Selects all attributes of the current node
+child----------------Selects all children of the current node
+descendant-----------Selects all descendants (children, grandchildren, etc.) of the current node
+descendant-or-self---Selects all descendants (children, grandchildren, etc.) of the current node and the current node itself
+following------------Selects everything in the document after the closing tag of the current node
+following-sibling----Selects all siblings after the current node
+namespace------------Selects all namespace nodes of the current node
+parent---------------Selects the parent of the current node
+preceding------------Selects all nodes that appear before the current node in the document, except ancestors, attribute nodes and namespace nodes
+preceding-sibling----Selects all siblings before the current node
+self-----------------Selects the current node
+		*/
 
 	}
 

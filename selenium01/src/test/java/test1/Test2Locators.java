@@ -10,6 +10,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.paulhammant.ngwebdriver.ByAngular;
+import com.paulhammant.ngwebdriver.NgWebDriver;
+
 public class Test2Locators extends Test1{
 
 	public static void main(String[] args) {
@@ -54,6 +57,12 @@ public class Test2Locators extends Test1{
 		driver.findElement(By.xpath("//a[contains(text(),'Click Here')]")).click();
 		driver.findElement(By.xpath("//div[starts-with(@class,'ig-ip_')]")).click();
 		driver.findElement(By.xpath("//div[ends-with(@class,'ig-ip_')]")).click();
+		
+		//angular 8 locator
+		JavascriptExecutor js=((JavascriptExecutor)driver);
+		NgWebDriver ngdriver=new NgWebDriver(js);
+		ngdriver.waitForAngularRequestsToFinish();
+		driver.findElement(ByAngular.buttonText("")).click();
 
 	}
 

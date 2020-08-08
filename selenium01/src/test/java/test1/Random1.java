@@ -14,6 +14,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class Random1 {
@@ -39,7 +40,7 @@ public class Random1 {
 	}
 
 	@Test
-	public void validateDriverProductCount() {
+	public void validateDriverProductCount() throws InterruptedException {
 		WebElement golfClub = driver
 				.findElement(By.xpath("//div[@id='header-navigation']//div//a[contains(text(),'Golf Clubs')]"));
 		act.moveToElement(golfClub).build().perform();
@@ -47,45 +48,42 @@ public class Random1 {
 				By.xpath("//div[@class='flyout-left']//span[@class='name'][contains(text(),'Drivers')]"))));
 		driver.findElement(By.xpath("//div[@class='flyout-left']//span[@class='name'][contains(text(),'Drivers')]"))
 				.click();
-		WebElement leftBox = driver.findElement(By.xpath("//div[@id='secondary']"));
-		// WebElement
-		// a=driver.findElement(By.xpath("//div[@class='grid-row']//i[@class='icon
-		// icon-plus']"));
-		// a.click();
-		// exe.executeScript("arguments[0].click()", a);
-		HashMap<String, Integer> driverCounts = new HashMap<String, Integer>();
 		List<WebElement> links = driver.findElements(By.xpath("//div[@id='secondary']//a"));
 		for (int x=0;x<links.size();x++) {
 			links = driver.findElements(By.xpath("//div[@id='secondary']//a"));
 			String url = links.get(x).getAttribute("href");
-			WebElement ds = driver.findElement(By.xpath("//a[@href='" + url + "']//span[@class='refinement-name']"));
+			if(driver.findElement(By.xpath("//div[@id='secondary']//h3[@class='toggle refinementhead']")).isDisplayed()) {
+				exe.executeScript("arguments[0].click()", driver.findElement(By.xpath("//div[@id='secondary']//h3[@class='toggle refinementhead']")));
+			}
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.xpath("//a[@href='" + url + "']//span[@class='refinement-name']")));
-			// System.out.println("ds="+ds);
 			String refinement_name = driver
 					.findElement(By.xpath("//a[@href='" + url + "']//span[@class='refinement-name']"))
 					.getAttribute("textContent");
 			String refinement_count = driver
 					.findElement(By.xpath("//a[@href='" + url + "']//span[@class='refinement-count']"))
 					.getAttribute("textContent");
-			System.out.println("refinement_name=" + refinement_name);
 
 			int count = Integer.parseInt(refinement_count.substring(2, refinement_count.length() - 1));
-			System.out.println("refinement_count=" + count);
-			driverCounts.put(refinement_name, count);
 			
-			//
-			links = driver.findElements(By.xpath("//div[@id='secondary']//a"));
-			url = links.get(x).getAttribute("href");
-			System.out.println("url="+url);
+			
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='secondary']//a[@href='"+url+"']")));
 			WebElement check=driver.findElement(By.xpath("//div[@id='secondary']//a[@href='"+url+"']"));
-			check.click();
+			exe.executeScript("arguments[0].click()", check);
 			scrollBottom();
 			List<WebElement> productsDisplayed = driver.findElements(By.xpath("//li[contains(@id,'liprod-')]"));
-			System.out.println("Count of "+refinement_name+" productsDisplayed=" + productsDisplayed.size());
+			//Validate the count an Assert
+			if(count==productsDisplayed.size()) {
+				System.out.println("Count Matched for Item "+refinement_name);
+			}
+			Assert.assertTrue(count==productsDisplayed.size(), "Count of Item"+refinement_name+"didnot matched");
+			
+			//Uncheck the checkbox
 			WebElement uncheck=driver.findElement(By.xpath("//div[@id='secondary']//a[@href='https://www.americangolf.co.uk/golf-clubs/drivers']"));
 			exe.executeScript("arguments[0].click()", uncheck);
+			Thread.sleep(3000);
+			
+			
 		}
 
 	}

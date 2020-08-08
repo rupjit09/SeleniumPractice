@@ -90,7 +90,7 @@ public class Random1 {
 
 	@AfterMethod
 	public void closeBrowser() {
-		// driver.quit();
+		 driver.quit();
 	}
 
 	// The below method helps to scroll to the bottom of the page when dyanamic
